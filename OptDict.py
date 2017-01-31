@@ -2,11 +2,11 @@ from collections import defaultdict
 import copy
 
 class OptDict(defaultdict):
-    """ Recursive default dictionary definition allowing to traverse it based 
-        on optional (potential missing) keys. Useful for traversing JSON with 
+    """ Recursive default dictionary definition allowing to traverse it based
+        on optional (potential missing) keys. Useful for traversing JSON with
         missing keys
     """
-    
+
     def __missing__(self, key):
         return self.default_factory()
 
@@ -26,7 +26,7 @@ class OptDict(defaultdict):
                     new_list = map(lambda x: to_opt_dict(x) if isinstance(x, dict) else x, v)
                     d[k] = new_list
             return opt_dict_factory(d)
-                
+
         return to_opt_dict(copy.deepcopy(dictionary))
 
 # USAGE:
